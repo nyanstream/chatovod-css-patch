@@ -8,6 +8,8 @@ Cборка – `npm run dist`
 
 Деплой на GitHub Pages – `npm run deploy`
 
+Всё вместе – `npm run assemble`
+
 ### Лицензия
 
 MIT.
