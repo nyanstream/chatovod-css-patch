@@ -1,0 +1,41 @@
+{
+    "name": "chatovod-css-patch",
+    "version": "1.0.0",
+    "private": true,
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/nyanstream/chatovod-css-patch.git"
+    },
+    "author": "Dmitry <dmitry@cojam.ru> (https://e965.ru)",
+    "license": "MIT",
+    "homepage": "https://nyan.stream",
+    "scripts": {
+        "cleanup": "del-cli ./dist",
+        "build": "sass ./src/chatovod.scss ./dist/chatovod.css --style=compressed",
+        "copy-images": "cpy ./src/images/ ./dist/images/",
+        "dist": "npm run cleanup && npm run build && npm run copy-images",
+        "deploy": "gh-pages -d dist",
+        "assemble": "npm run dist && npm run deploy",
+        "prettier": "prettier --write **/*.{json,scss}",
+        "lint-staged": "lint-staged"
+    },
+    "lint-staged": {
+        "*.{json,scss}": [
+            "prettier --write"
+        ]
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "npm run lint-staged"
+        }
+    },
+    "devDependencies": {
+        "cpy-cli": "3.1.1",
+        "del-cli": "3.0.1",
+        "gh-pages": "3.1.0",
+        "husky": "4.3.6",
+        "lint-staged": "10.5.3",
+        "prettier": "2.2.1",
+        "sass": "1.30.0"
+    }
+}

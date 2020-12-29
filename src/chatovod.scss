@@ -1,0 +1,524 @@
+@import 'inc/mixins';
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+:root {
+    $primeColor: #ad2929;
+
+    --prime-color-10d: #{darken($primeColor, 10%)};
+    --prime-color-5d: #{darken($primeColor, 5%)};
+
+    --scroll-color: #828282;
+
+    --nickname-color: var(--prime-color-10d);
+
+    @media screen and (prefers-color-scheme: dark) {
+        $primeColorDark: #464646;
+
+        body {
+            --prime-color: #{$primeColorDark};
+            --prime-color-10d: #{darken($primeColorDark, 10%)};
+            --prime-color-5d: #{darken($primeColorDark, 5%)};
+
+            @media screen and (prefers-color-scheme: dark) {
+                --nickname-color: #c4c4c4;
+            }
+        }
+    }
+}
+
+/*
+ * Большой набор костылей для стилизации Чатовода
+ */
+
+body {
+    .chat {
+        font-family: Roboto, Arial, sans-serif !important;
+
+        @media screen and (prefers-color-scheme: dark) {
+            color: #b1b1b1 !important;
+        }
+    }
+}
+
+// @keyframes colorRainbow {
+// 	0% { color: red	}
+// 	16.6% { color: orange }
+// 	33.3% { color: yellow }
+// 	50% { color: green }
+// 	66.6% { color: blue }
+// 	83.3% { color: aquamarine }
+// 	100% { color: violet }
+// }
+//
+// .chatUser[rel="2472033"] {
+// 	animation: colorRainbow 5s ease-in-out 0s infinite;
+// }
+
+em {
+    font-style: normal;
+}
+strong {
+    font-weight: normal;
+}
+
+button,
+input[type='button'],
+select {
+    font: inherit;
+}
+
+a[href*='?cat=vip'],
+.chatLinkImage {
+    display: none !important;
+}
+
+.chat,
+.chatHeader {
+    border-color: transparent;
+    background-color: transparent;
+}
+
+.chat {
+    font-size: 14px;
+
+    border: 0;
+
+    &Main,
+    &Footer {
+        background-color: transparent;
+        background-image: none;
+    }
+
+    &Tabs {
+        &Left {
+            width: 10px;
+        }
+
+        ul {
+            left: 10px;
+        }
+
+        .appTab {
+            display: none;
+        }
+
+        & > ul > li.chatTab {
+            &.chatTabActive > a,
+            & > a:hover,
+            & > a:active {
+                background-color: var(--prime-color-10d) !important;
+            }
+        }
+    }
+
+    @at-root .smilesBox,
+        &Main,
+        &EventDiv,
+        &People ul.chatPeopleList li.hover,
+        &PopupMenuDiv1,
+        &PopupMenuDiv2 {
+        background-color: #fff;
+
+        @media screen and (prefers-color-scheme: dark) {
+            background-color: var(--prime-color-5d);
+        }
+    }
+
+    &MenuItemWithSeparator {
+        a[href='#'] {
+            padding-right: 13px;
+
+            .menu_profile_title {
+                font-size: 0;
+            }
+        }
+    }
+
+    &People ul.chatPeopleList li.hover {
+        border: 0 !important;
+    }
+
+    &Footer {
+        background-color: #f5f5f5;
+
+        & > &Wrapper {
+            width: 100%;
+            height: 100%;
+        }
+
+        font-weight: normal;
+
+        @media screen and (prefers-color-scheme: dark) {
+            background-color: var(--prime-color-5d);
+            border-top: 0;
+        }
+    }
+
+    &People {
+        border-left: 0 !important;
+
+        .chatPeople {
+            &List img {
+                display: none;
+            }
+            &Title {
+                padding-top: 40px;
+            }
+        }
+    }
+
+    &FooterWrapper {
+        @include flexbox(auto, center, center, auto);
+    }
+
+    &SetupNickname {
+        width: 100%;
+        height: 100%;
+        position: static;
+
+        line-height: 1;
+
+        background-color: var(--prime-color-10d) !important;
+
+        #join-chat-button {
+            width: 100%;
+            height: 100%;
+            padding: 5px !important;
+
+            background-color: transparent;
+            border: 0 !important;
+
+            font-weight: normal;
+            font-size: 1.3em;
+            color: #fff;
+
+            outline: 0;
+
+            cursor: pointer;
+
+            &:hover {
+                background-color: var(--prime-color-5d) !important;
+            }
+        }
+    }
+
+    &SoundPanel {
+        top: 10px !important;
+        right: 120px !important;
+
+        @media screen and (prefers-color-scheme: dark) {
+            a {
+                color: #d6d6d6;
+
+                span {
+                    border-bottom: 0 !important;
+                }
+            }
+        }
+    }
+
+    &Send {
+        &ExitPanel {
+            top: 6px !important;
+            right: 10px !important;
+        }
+
+        &ButtonPanel {
+            width: auto;
+            top: 32px !important;
+            right: 10px !important;
+        }
+
+        &TextPanel {
+            top: 32px !important;
+            right: 95px !important;
+            left: 10px !important;
+        }
+
+        &LinksPanel {
+            top: 10px !important;
+            left: 10px !important;
+
+            .chatLinkGold,
+            .chatLinkProfile,
+            .chatLinkMore {
+                display: none;
+            }
+
+            a.chatLinkSmiles {
+                background-image: url('./images/zephir.png');
+                background-color: transparent;
+            }
+
+            @media screen and (prefers-color-scheme: dark) {
+                a {
+                    color: #d6d6d6;
+
+                    span {
+                        border-bottom: 0 !important;
+                    }
+                }
+            }
+        }
+    }
+
+    &SendButtonPanel input,
+    &SendExitPanel select,
+    &SetupNickname input,
+    &Full #join-buttons input {
+        $_borderColor: #a9a9a9;
+
+        background-color: #fff;
+        border: 1px solid $_borderColor;
+
+        @include transition(0.3s);
+    }
+
+    &Message img[alt*=':'],
+    & .smilesBox a[onclick*='chatSmile'] img {
+        max-height: 64px;
+        margin: 0 2px;
+    }
+
+    &Message {
+        padding-left: 10px;
+
+        &ToMe .chatToUser {
+            color: #fff !important;
+        }
+
+        span:not([class*='User']) {
+            color: #000 !important;
+        }
+
+        .chatUserFrom span[style] {
+            color: var(--nickname-color) !important;
+        }
+    }
+
+    &Main {
+        top: 0;
+
+        & .chatMessages,
+        & .chatPrivateMessages {
+            font-size: 1em;
+        }
+    }
+
+    &User {
+        &Icon {
+            display: none;
+        }
+
+        &Wrapper {
+            margin-left: 0;
+            cursor: default;
+        }
+
+        &Menu {
+            padding-top: 5px;
+
+            &Items {
+                margin-left: 0;
+                border-left: 2px solid var(--prime-color-5d);
+                padding-left: 5px;
+
+                & > ul > li > a {
+                    &[class*='Photos'],
+                    &[class*='Gift'] {
+                        display: none;
+                    }
+
+                    @media screen and (prefers-color-scheme: dark) {
+                        & {
+                            color: #d6d6d6;
+                        }
+                    }
+                }
+            }
+        }
+
+        &From {
+            font-weight: 500;
+        }
+
+        &Avatar {
+            display: none;
+        }
+    }
+
+    &UserFrom,
+    &People ul.chatPeopleList li a.chatUser,
+    &People ul.chatPeopleList li a.chatUser span[style] {
+        color: var(--nickname-color) !important;
+    }
+
+    &Header {
+        height: 0;
+        .chatTitle {
+            display: none;
+        }
+
+        .chatTopLine {
+            background-color: #fff;
+            border-color: #bdbdbd;
+            right: 10px;
+        }
+    }
+
+    &SystemMessage.type-event {
+        display: none;
+    }
+
+    &TopLineWrapper {
+        a {
+            &[href*='photos'],
+            &[href*='cat=bal'],
+            &[href*='guests'],
+            &[href*='gallery'],
+            &[href*='news'],
+            &[href*='rules'],
+            &[href*='code'],
+            &[href*='friends'] {
+                display: none;
+            }
+        }
+
+        & > ul > li > a {
+            text-shadow: none;
+            background-image: none !important;
+
+            &:hover {
+                background-color: rgba(#000, 0.1);
+            }
+        }
+
+        & > ul > li:not(:last-child) > a {
+            border-right: 1px #bdbdbd solid;
+        }
+
+        & > ul > li > ul > li > a {
+            width: auto;
+        }
+    }
+
+    &Full {
+        .transparent {
+            @media screen and (prefers-color-scheme: dark) {
+                background-color: #575757;
+            }
+        }
+
+        a {
+            $textColor: #000;
+
+            display: inline;
+            padding: 0 0.5px;
+            text-decoration: none;
+            color: $textColor;
+            border-bottom: 1px solid $textColor;
+
+            @include transition(0.3s);
+
+            &:hover {
+                background-color: rgba($textColor, 0.1);
+            }
+
+            @media screen and (prefers-color-scheme: dark) {
+                $textColorLight: #fff;
+
+                font-weight: normal;
+                color: $textColorLight;
+                border-bottom: 1px solid $textColorLight;
+
+                &:hover {
+                    background-color: rgba($textColorLight, 0.1);
+                }
+            }
+        }
+
+        #account-info,
+        #new-nick-label,
+        #existing-nick-label {
+            @media screen and (prefers-color-scheme: dark) {
+                color: #fff;
+            }
+        }
+    }
+
+    &Input {
+        &Text {
+            @media screen and (prefers-color-scheme: dark) {
+                background: none;
+                background-color: var(--prime-color-10d);
+                color: #e3e3e3;
+                padding: 0 2.5px;
+            }
+        }
+    }
+
+    #chatMainMenuProfile,
+    #chatMainMenuChat {
+        width: auto !important;
+        border: 0;
+        box-shadow: 0px 0px 5px rgba(#000, 0.2);
+        min-width: 130px;
+
+        a {
+            &[href*='/users/'] {
+                display: none;
+            }
+        }
+    }
+
+    .chatPopupMenu {
+        &Div1,
+        &Div2 {
+            border: 0;
+        }
+
+        &Div2 {
+            box-shadow: 0px 0px 5px rgba(#000, 0.1);
+        }
+    }
+
+    .smilesBox {
+        p {
+            font-size: 0;
+        }
+    }
+
+    #scrollBottomBox {
+        background-color: var(--scroll-color);
+        border-color: var(--scroll-color);
+        font-family: inherit;
+        color: #fff;
+        opacity: 0.8;
+
+        @include transition(0.3s);
+    }
+}
+
+.vscrollable {
+    &::-webkit-scrollbar {
+        width: 4px;
+
+        &-thumb {
+            background-color: var(--prime-color-5d);
+
+            &:hover {
+                background-color: var(--prime-color-10d);
+            }
+        }
+    }
+
+    @supports (-moz-appearance: none) {
+        scrollbar-width: thin;
+        scrollbar-color: var(--prime-color-5d) #fff;
+    }
+}

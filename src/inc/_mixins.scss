@@ -1,0 +1,42 @@
+@mixin transition($sec) {
+    transition: all $sec ease-in-out;
+}
+
+@mixin flexbox($direction, $justify, $align-items, $align-content) {
+    display: flex;
+    @if $direction != auto {
+        flex-direction: $direction;
+    }
+    @if $justify != auto {
+        justify-content: $justify;
+    }
+    @if $align-items != auto {
+        align-items: $align-items;
+    }
+    @if $align-content != auto {
+        align-content: $align-content;
+    }
+}
+
+@mixin selection($bckgColor, $textColor) {
+    ::-webkit-selection {
+        background-color: $bckgColor;
+        @if $textColor {
+            color: $textColor;
+        }
+    }
+
+    ::-moz-selection {
+        background-color: $bckgColor;
+        @if $textColor {
+            color: $textColor;
+        }
+    }
+
+    ::selection {
+        background-color: $bckgColor;
+        @if $textColor {
+            color: $textColor;
+        }
+    }
+}
